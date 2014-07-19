@@ -27,5 +27,14 @@ sourceSets {
             srcDir 'source/resources'
         }
     }
+	demo{
+		java {
+			srcDir 'source/demo/java'
+		}
+	}
+}
+
+task buildDemo(type: Jar) {
+    from sourceSets.demo.output
 }
 
