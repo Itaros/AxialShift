@@ -13,36 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.axialshift.vram;
+package ru.axialshift.resources;
 
-public abstract class VRAMObject {
+public class QuadMesh extends MeshData {
 
-	boolean isChangingStates=false;
-	boolean isAvailable=false;
-	
-
-	public void upload(){
-		upload_gl();
-		isAvailable=true;
-	}
-	
-
-	public void unload(){
-		isAvailable=false;
-		unload_gl();
-	}
-	
-	protected abstract void upload_gl();
-	protected abstract void unload_gl();
-	
-	
-	public String identifier(){
-		return this.getClass().getSimpleName();
-	}
-
-
-	public boolean IsAvailable() {
-		return isAvailable;
+	public QuadMesh() {
+		super();
+		vertices =  new float[]{
+				-0.5f, 0.5f, 0f,    // Left top         ID: 0
+				-0.5f, -0.5f, 0f,   // Left bottom      ID: 1
+				0.5f, -0.5f, 0f,    // Right bottom     ID: 2
+				0.5f, 0.5f, 0f  	// Right left       ID: 3
+				};
+		
+		indices = new byte[]{
+				0,1,2,
+				2,3,0
+		};
+		
+		uvs = new float[]{
+				0,0,
+				0,1,
+				1,1,
+				1,0
+		};
+		
+		this.calculate();
 	}
 
 }

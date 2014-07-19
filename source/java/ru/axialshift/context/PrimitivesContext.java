@@ -13,36 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.axialshift.vram;
+package ru.axialshift.context;
 
-public abstract class VRAMObject {
+import ru.axialshift.resources.QuadMesh;
+import ru.axialshift.vram.VRAMObject;
+import ru.axialshift.vram.gl.VAOIncapsulator;
 
-	boolean isChangingStates=false;
-	boolean isAvailable=false;
-	
+public class PrimitivesContext extends Context {
 
-	public void upload(){
-		upload_gl();
-		isAvailable=true;
-	}
-	
-
-	public void unload(){
-		isAvailable=false;
-		unload_gl();
-	}
-	
-	protected abstract void upload_gl();
-	protected abstract void unload_gl();
+	private VAOIncapsulator quad = new VAOIncapsulator(new QuadMesh());
 	
 	
-	public String identifier(){
-		return this.getClass().getSimpleName();
+	public PrimitivesContext() {
+		super();
+		this.setVRAMObjects(defineStaticData());
+		this.makeFinal();
 	}
 
-
-	public boolean IsAvailable() {
-		return isAvailable;
+	private VRAMObject[] defineStaticData() {
+		return new VRAMObject[]{quad};
 	}
 
+	
+	public VAOIncapsulator getQuad(){
+		return quad;
+	}
+	
 }

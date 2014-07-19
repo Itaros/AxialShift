@@ -62,13 +62,15 @@ public class VRAMBusManager {
 		VRAMObject vo;
 		vo = queue_in.poll();
 		if(vo!=null){
+			System.out.println("VRAM upload: "+vo.identifier());
 			vo.upload();
 			loaded.add(vo);
 			vo.isChangingStates=false;
 		}
 		vo = queue_out.poll();
 		if(vo!=null){
-			vo.upload();
+			System.out.println("VRAM unload: "+vo.identifier());
+			vo.unload();
 			loaded.remove(vo);
 			vo.isChangingStates=false;
 		}		

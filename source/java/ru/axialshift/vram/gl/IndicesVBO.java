@@ -18,6 +18,7 @@ package ru.axialshift.vram.gl;
 import java.nio.ByteBuffer;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 
 import ru.axialshift.resources.MeshData;
@@ -27,8 +28,11 @@ import ru.axialshift.resources.MeshData;
  */
 public class IndicesVBO extends VBO {
 	
+	int indicesCount;
+	
 	public IndicesVBO(MeshData data){
 		this.data=data;
+		this.indicesCount=this.data.getIndices().length;
 		generateData();
 	}	
 	
@@ -51,6 +55,12 @@ public class IndicesVBO extends VBO {
 	protected void unload_gl() {
 		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
 		super.unload_gl();
+	}
+
+	public void draw() {
+		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, glpointer);
+		GL11.glDrawElements(GL11.GL_TRIANGLES, indicesCount, GL11.GL_UNSIGNED_BYTE, 0);
+		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
 }

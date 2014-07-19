@@ -71,26 +71,27 @@ public class VertexVBO extends VBO {
 		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, (FloatBuffer)tovram, GL15.GL_STATIC_DRAW);
 		
 		//Mapping
+		int stride=4*(MeshData.VERTICES_STRIDE+MeshData.UVS_STRIDE+MeshData.NORMALS_STRIDE+MeshData.TANGENTS_STRIDE+MeshData.BITANGENTS_STRIDE);
 		int offset=0;
 		//Vertices
 		int bytesPerVertex = MeshData.VERTICES_STRIDE*4;
-		GL20.glVertexAttribPointer(id_pos, data.getVertices().length, GL11.GL_FLOAT, false, bytesPerVertex, 0);
+		GL20.glVertexAttribPointer(id_pos, MeshData.VERTICES_STRIDE, GL11.GL_FLOAT, false, stride, offset);
 		//UVs
 		int bytesPerUVs = MeshData.UVS_STRIDE*4;
 		offset+=bytesPerVertex;
-		GL20.glVertexAttribPointer(id_uvs, data.getUVs().length, GL11.GL_FLOAT, false, bytesPerUVs, offset);
+		GL20.glVertexAttribPointer(id_uvs, MeshData.UVS_STRIDE, GL11.GL_FLOAT, false, stride, offset);
 		//Normals
 		int bytesPerNormals = MeshData.NORMALS_STRIDE*4;
 		offset+=bytesPerUVs;
-		GL20.glVertexAttribPointer(id_nor, data.getNormals().length, GL11.GL_FLOAT, false, bytesPerNormals, offset);	
+		GL20.glVertexAttribPointer(id_nor, MeshData.NORMALS_STRIDE, GL11.GL_FLOAT, false, stride, offset);	
 		//Tangents
 		int bytesPerTangents = MeshData.TANGENTS_STRIDE*4;
 		offset+=bytesPerNormals;
-		GL20.glVertexAttribPointer(id_tan, data.getTangents().length, GL11.GL_FLOAT, false, bytesPerTangents, offset);	
+		GL20.glVertexAttribPointer(id_tan, MeshData.TANGENTS_STRIDE, GL11.GL_FLOAT, false, stride, offset);	
 		//BiTangents
-		int bytesPerBiTangents = MeshData.BITANGENTS_STRIDE*4;
+		//int bytesPerBiTangents = MeshData.BITANGENTS_STRIDE*4;
 		offset+=bytesPerTangents;
-		GL20.glVertexAttribPointer(id_btan, data.getBiTangents().length, GL11.GL_FLOAT, false, bytesPerBiTangents, offset);	
+		GL20.glVertexAttribPointer(id_btan, MeshData.BITANGENTS_STRIDE, GL11.GL_FLOAT, false, stride, offset);	
 		
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);		
 	}

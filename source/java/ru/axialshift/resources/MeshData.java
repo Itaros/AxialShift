@@ -17,6 +17,9 @@ package ru.axialshift.resources;
 
 public class MeshData {
 
+	protected MeshData(){
+		
+	}
 
 	public MeshData(float[] vertices, byte[] indices){
 		this.vertices=vertices;
@@ -28,13 +31,13 @@ public class MeshData {
 		return this;
 	}
 	
-	private float[] vertices;
-	private float[] uvs;
-	private float[] normals;
-	private float[] tangents;
-	private float[] bitangents;
+	protected float[] vertices;
+	protected float[] uvs;
+	protected float[] normals;
+	protected float[] tangents;
+	protected float[] bitangents;
 	
-	private byte[] indices;
+	protected byte[] indices;
 	
 	private boolean isReady=false;
 	

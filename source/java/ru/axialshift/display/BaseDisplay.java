@@ -22,17 +22,17 @@ import ru.axialshift.vram.VRAMBusManager;
 
 public class BaseDisplay {
 
-	GLInitializer initializer=new GLInitializer();
-	Processor processor = new Processor();
-	VRAMBusManager bus = new VRAMBusManager();
-	ContextManager manager = new ContextManager(bus);
-	RenderingManager rendering = new RenderingManager();
+	protected GLInitializer initializer=new GLInitializer();
+	protected Processor processor = new Processor();
+	protected VRAMBusManager bus = new VRAMBusManager();
+	protected ContextManager manager = new ContextManager(bus);
+	protected RenderingManager rendering = new RenderingManager();
 	
 	protected void start(){
 		initializer.set32GLDisplay(800, 600);
 		
-		//Setting dummy rendering program
-		rendering.setRendering(new IRenderProgram[]{new ClearScreenPass()});
+		
+		
 		
 		processor.start(manager,rendering);
 		
@@ -43,6 +43,7 @@ public class BaseDisplay {
 		System.out.println("Starting base display!");
 		Console.out_separator();
 		BaseDisplay base = new BaseDisplay();
+		base.rendering.setRendering(new IRenderProgram[]{new ClearScreenPass()});//Setting dummy rendering program
 		base.start();
 		Console.out_separator();
 		System.out.println("Have a good day, sir!");

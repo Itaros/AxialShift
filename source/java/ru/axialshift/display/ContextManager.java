@@ -15,6 +15,9 @@
  */
 package ru.axialshift.display;
 
+import java.util.ArrayList;
+
+import ru.axialshift.context.Context;
 import ru.axialshift.vram.VRAMBusManager;
 
 public class ContextManager {
@@ -29,9 +32,22 @@ public class ContextManager {
 		return bus;
 	}
 
+	private ArrayList<Context> loaded = new ArrayList<Context>();
+	
+	public void enqueueContext(Context context){
+		System.out.println("Context enqueued: "+context.getClass().getSimpleName());
+		loaded.add(context);
+		context.upload(bus);
+	}
+	
+	public void relieveContext(Context context){
+		System.out.println("Context dequeued: "+context.getClass().getSimpleName());
+		loaded.remove(context);
+		context.unload(bus);
+	}
 	
 	void process(){
-		
+		;
 	}
 	
 }
