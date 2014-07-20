@@ -18,6 +18,8 @@ dependencies {
     compile 'org.l33tlabs.twl:pngdecoder:1.0'
 }
 
+def nativesDir =project.name+"/natives"
+
 sourceSets {
     main {
         java {
@@ -36,5 +38,28 @@ sourceSets {
 
 task buildDemo(type: Jar) {
     from sourceSets.demo.output
+}
+
+eclipse.classpath.file.whenMerged{classpath -> 
+	println('Adding lwjgl natives to classpath...');   
+    def lwjgl = classpath.entries.findResult { entry ->  
+        if (entry.kind == 'lib' && entry.path.contains('lwjgl')) {  
+            return entry  
+        }  
+    }  
+    lwjgl.setNativeLibraryLocation(nativesDir)  
+}
+
+task setupDevWorkspace(type: Copy){
+	getDepJar().each{File file -> 
+		println('Detected natives jar: '+file.name)
+		from(zipTree(file))
+	}
+	exclude 'META-INF/*'
+	exclude 'META-INF'
+	into 'natives'
+}
+def getDepJar(){
+	 configurations.compile.filter{it.name.endsWith('-natives-windows.jar')}
 }
 
