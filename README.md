@@ -2,7 +2,7 @@ AxialShift
 ==========
 
 #OVERVIEW#
-LWJGL-based Rendering Engine with on-demand continous videodata exchange concept.
+LWJGL-based Rendering Engine with on-demand continuous videodata exchange concept.
 
 Experimental, not yet finished.
 
