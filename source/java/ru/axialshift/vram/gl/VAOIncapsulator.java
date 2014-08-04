@@ -68,7 +68,7 @@ public class VAOIncapsulator extends VRAMObject {
 	public void drawDirectly() {
 		GL30.glBindVertexArray(glpointer);
 		GL20.glEnableVertexAttribArray(0);
-		//GL20.glEnableVertexAttribArray(1);
+		GL20.glEnableVertexAttribArray(1);
 		//GL20.glEnableVertexAttribArray(2);
 		//GL20.glEnableVertexAttribArray(3);
 		//GL20.glEnableVertexAttribArray(4);

@@ -1,5 +1,6 @@
 package ru.axialshift.demo;
 
+import ru.axialshift.context.DebugToolsContext;
 import ru.axialshift.context.PrimitivesContext;
 import ru.axialshift.display.BaseDisplay;
 import ru.axialshift.programs.ClearScreenPass;
@@ -9,12 +10,13 @@ import ru.axialshift.utils.Console;
 public class DemoDisplay extends BaseDisplay {
 
 	PrimitivesContext primitives = new PrimitivesContext();
-	
+	DebugToolsContext debugTools = new DebugToolsContext();
 	
 	@Override
 	protected void start() {
 		this.manager.enqueueContext(primitives);
-		this.rendering.setRendering(new IRenderProgram[]{new ClearScreenPass(),new QuadRenderingDebugPass(primitives)});
+		this.manager.enqueueContext(debugTools);
+		this.rendering.setRendering(new IRenderProgram[]{new ClearScreenPass(),new QuadRenderingDebugPass(primitives,debugTools)});
 		
 		super.start();
 	}
