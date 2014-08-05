@@ -16,6 +16,7 @@
 package ru.axialshift.context;
 
 import ru.axialshift.resources.QuadMesh;
+import ru.axialshift.vram.BindingContract;
 import ru.axialshift.vram.VRAMObject;
 import ru.axialshift.vram.gl.VAOIncapsulator;
 
@@ -38,5 +39,6 @@ public class PrimitivesContext extends Context {
 	public VAOIncapsulator getQuad(){
 		return quad;
 	}
+
 	
 }

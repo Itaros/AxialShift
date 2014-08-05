@@ -15,6 +15,8 @@
  */
 package ru.axialshift.context;
 
+import ru.axialshift.vram.BindingContract;
+import ru.axialshift.vram.IRequiresBindingContract;
 import ru.axialshift.vram.VRAMBusManager;
 import ru.axialshift.vram.VRAMObject;
 
@@ -37,6 +39,7 @@ public class Context {
 	
 	public Context setVRAMObjects(VRAMObject...objects){
 		loadables=objects;
+		bindContract();
 		return this;
 	}
 	
@@ -88,5 +91,22 @@ public class Context {
 			isChangingStates=false;
 		}
 	}
+
+	
+	private BindingContract contract;
+	
+	private void bindContract(){
+		for(VRAMObject o:loadables){
+			if(o instanceof IRequiresBindingContract){
+				IRequiresBindingContract irbc = (IRequiresBindingContract)o;
+				irbc.setBindingContract(contract);
+			}
+		}
+	}
+	
+	public void setBindingContractToAll(BindingContract contract) {
+		this.contract=contract;
+		bindContract();
+	}	
 	
 }
