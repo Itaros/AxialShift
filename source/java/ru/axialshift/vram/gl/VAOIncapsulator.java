@@ -19,12 +19,14 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import ru.axialshift.resources.MeshData;
+import ru.axialshift.vram.BindingContract;
+import ru.axialshift.vram.IRequiresBindingContract;
 import ru.axialshift.vram.VRAMObject;
 
 /*
  * VAO to represent all VRAM data needed to render MeshData
  */
-public class VAOIncapsulator extends VRAMObject {
+public class VAOIncapsulator extends VRAMObject implements IRequiresBindingContract {
 
 	private int glpointer;
 	
@@ -67,8 +69,12 @@ public class VAOIncapsulator extends VRAMObject {
 	 */
 	public void drawDirectly() {
 		GL30.glBindVertexArray(glpointer);
-		GL20.glEnableVertexAttribArray(0);
-		GL20.glEnableVertexAttribArray(1);
+		
+		if(contract!=null){
+			contract.enableVBOAttribArrays();
+		}
+		//GL20.glEnableVertexAttribArray(0);
+		//GL20.glEnableVertexAttribArray(1);
 		//GL20.glEnableVertexAttribArray(2);
 		//GL20.glEnableVertexAttribArray(3);
 		//GL20.glEnableVertexAttribArray(4);
@@ -78,4 +84,19 @@ public class VAOIncapsulator extends VRAMObject {
 		GL30.glBindVertexArray(0);
 	}
 
+	
+	private BindingContract contract;
+	
+	@Override
+	public IRequiresBindingContract setBindingContract(BindingContract contract) {
+		this.contract=contract;
+		return this;
+	}
+
+
+	@Override
+	public BindingContract getBindingContract() {
+		return contract;
+	}	
+	
 }

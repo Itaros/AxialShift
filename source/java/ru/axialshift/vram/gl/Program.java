@@ -2,9 +2,11 @@ package ru.axialshift.vram.gl;
 
 import org.lwjgl.opengl.GL20;
 
+import ru.axialshift.vram.BindingContract;
+import ru.axialshift.vram.IRequiresBindingContract;
 import ru.axialshift.vram.VRAMObject;
 
-public class Program extends VRAMObject {
+public class Program extends VRAMObject implements IRequiresBindingContract {
 
 	private int pointer;
 	
@@ -26,8 +28,9 @@ public class Program extends VRAMObject {
 		GL20.glAttachShader(pointer, fragment.getPointer());
 		
 		//TODO: add pointers contract there
-		GL20.glBindAttribLocation(pointer, 0, "in_Position");
-		GL20.glBindAttribLocation(pointer, 1, "in_uvs");
+		if(contract!=null){
+			contract.configureGLShader(pointer);
+		}
 		
 		GL20.glLinkProgram(pointer);
 		GL20.glValidateProgram(pointer);
@@ -50,6 +53,21 @@ public class Program extends VRAMObject {
 
 	public void makeActive() {
 		GL20.glUseProgram(pointer);
+	}
+
+
+	private BindingContract contract;
+	
+	@Override
+	public IRequiresBindingContract setBindingContract(BindingContract contract) {
+		this.contract=contract;
+		return this;
+	}
+
+
+	@Override
+	public BindingContract getBindingContract() {
+		return contract;
 	}
 
 }
