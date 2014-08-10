@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.axialshift.entities;
+package ru.axialshift.scene;
 
 import java.nio.FloatBuffer;
 
@@ -24,6 +24,9 @@ import org.lwjgl.util.vector.Vector3f;
 
 import ru.axialshift.utils.Conversions;
 
+/*
+ * Dead class. Delete it. Only for reference.
+ */
 public class MovableEntity {
 
 	private Matrix4f model=new Matrix4f();
