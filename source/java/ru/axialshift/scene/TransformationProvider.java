@@ -14,14 +14,14 @@ public class TransformationProvider {
 	
 	public FloatBuffer getTransformationFeed(){
 		if(isTransformationInvalidated){
-			fillMatrix();
+			fillMatrix(model);
 			fillBuffer();
 		}
 		return modelBuffer;
 	}
 
 
-	protected void fillMatrix() {
+	protected void fillMatrix(Matrix4f model) {
 		//Does nothing here, but extension classes fill matrix there
 	}
 
@@ -33,6 +33,10 @@ public class TransformationProvider {
 	
 	protected void markDirty(){
 		isTransformationInvalidated=true;
+	}
+	
+	public Matrix4f getM(){
+		return model;
 	}
 	
 }

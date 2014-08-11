@@ -16,6 +16,7 @@
 package ru.axialshift.display;
 
 import ru.axialshift.programs.IRenderProgram;
+import ru.axialshift.vram.gl.Program;
 
 public class RenderingManager {
 
@@ -30,10 +31,20 @@ public class RenderingManager {
 		if(passes!=null){
 			for(int i = 0; i< passes.length;i++){
 				if(passes[i].isActive()){
-					passes[i].execute();
+					passes[i].execute(this);
 				}
 			}
 		}
+	}
+
+	private Program current;
+	
+	public void notifyProgramActivation(Program program) {
+		this.current=program;
+	}
+
+	public Program getCurrentProgram() {
+		return current;
 	}
 	
 }

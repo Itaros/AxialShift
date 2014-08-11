@@ -2,6 +2,7 @@ package ru.axialshift.vram.gl;
 
 import org.lwjgl.opengl.GL20;
 
+import ru.axialshift.display.RenderingManager;
 import ru.axialshift.vram.BindingContract;
 import ru.axialshift.vram.IRequiresBindingContract;
 import ru.axialshift.vram.VRAMObject;
@@ -17,6 +18,11 @@ public class Program extends VRAMObject implements IRequiresBindingContract {
 		this.fragment=fragment;
 	}
 	
+	private int MVPPointer;
+	
+	public int getMVPPointer(){
+		return MVPPointer;
+	}
 	
 	@Override
 	protected void upload_gl() {
@@ -27,13 +33,15 @@ public class Program extends VRAMObject implements IRequiresBindingContract {
 		GL20.glAttachShader(pointer, vertex.getPointer());
 		GL20.glAttachShader(pointer, fragment.getPointer());
 		
-		//TODO: add pointers contract there
 		if(contract!=null){
 			contract.configureGLShader(pointer);
 		}
 		
 		GL20.glLinkProgram(pointer);
 		GL20.glValidateProgram(pointer);
+		
+		//TODO: There should be shader descriptor file to list uniform requirments
+		MVPPointer = GL20.glGetUniformLocation(pointer, "MVP");		
 	}
 
 	@Override
@@ -51,7 +59,8 @@ public class Program extends VRAMObject implements IRequiresBindingContract {
 	}
 
 
-	public void makeActive() {
+	public void makeActive(RenderingManager renderingManager) {
+		renderingManager.notifyProgramActivation(this);
 		GL20.glUseProgram(pointer);
 	}
 

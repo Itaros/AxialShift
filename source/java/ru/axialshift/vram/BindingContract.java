@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL20;
  */
 public class BindingContract {
 
-	private class ContractPair{
+	private static class ContractPair{
 
 		private int index;
 		private String pointname;
@@ -25,7 +25,6 @@ public class BindingContract {
 		public String getPointname() {
 			return pointname;
 		}
-		
 		
 		
 	}

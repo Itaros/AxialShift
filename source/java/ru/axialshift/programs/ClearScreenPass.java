@@ -17,10 +17,12 @@ package ru.axialshift.programs;
 
 import org.lwjgl.opengl.GL11;
 
+import ru.axialshift.display.RenderingManager;
+
 public class ClearScreenPass extends BasePass {
 
 	@Override
-	public void execute() {
+	public void execute(RenderingManager renderingManager) {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 	}
 

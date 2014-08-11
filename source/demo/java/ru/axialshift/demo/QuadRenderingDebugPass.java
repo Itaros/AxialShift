@@ -2,6 +2,7 @@ package ru.axialshift.demo;
 
 import ru.axialshift.context.DebugToolsContext;
 import ru.axialshift.context.PrimitivesContext;
+import ru.axialshift.display.RenderingManager;
 import ru.axialshift.programs.BasePass;
 
 public class QuadRenderingDebugPass extends BasePass {
@@ -15,8 +16,8 @@ public class QuadRenderingDebugPass extends BasePass {
 	}
 	
 	@Override
-	public void execute() {
-		debugTools.getUVsProgram().makeActive();
+	public void execute(RenderingManager renderingManager) {
+		debugTools.getUVsProgram().makeActive(renderingManager);
 		primitives.getQuad().drawDirectly();
 	}
 

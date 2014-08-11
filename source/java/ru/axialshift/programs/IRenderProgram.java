@@ -15,11 +15,14 @@
  */
 package ru.axialshift.programs;
 
+import ru.axialshift.display.RenderingManager;
+
 public interface IRenderProgram {
 
-	public void execute();
+	public void execute(RenderingManager renderingManager);
 	
 	public boolean isActive();
 	public void enable();
 	public void disable();
+
 }

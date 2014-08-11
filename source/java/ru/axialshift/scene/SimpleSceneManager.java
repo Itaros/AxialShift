@@ -1,6 +1,7 @@
 package ru.axialshift.scene;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class SimpleSceneManager {
@@ -38,6 +39,10 @@ public class SimpleSceneManager {
 	
 	public void setCamera(Camera c){
 		camera = c;
+	}
+	
+	public Iterator<Entity> getActiveIterator() {
+		return active.iterator();
 	}
 	
 }
