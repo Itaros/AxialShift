@@ -18,11 +18,15 @@ public class Program extends VRAMObject implements IRequiresBindingContract {
 		this.fragment=fragment;
 	}
 	
-	private int MVPPointer;
+	private int MPointer;
+	private int VPPointer;
 	
-	public int getMVPPointer(){
-		return MVPPointer;
+	public int getMPointer(){
+		return MPointer;
 	}
+	public int getVPPointer(){
+		return VPPointer;
+	}	
 	
 	@Override
 	protected void upload_gl() {
@@ -41,7 +45,8 @@ public class Program extends VRAMObject implements IRequiresBindingContract {
 		GL20.glValidateProgram(pointer);
 		
 		//TODO: There should be shader descriptor file to list uniform requirments
-		MVPPointer = GL20.glGetUniformLocation(pointer, "MVP");		
+		MPointer = GL20.glGetUniformLocation(pointer, "M");	
+		VPPointer = GL20.glGetUniformLocation(pointer, "VP");	
 	}
 
 	@Override

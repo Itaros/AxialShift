@@ -44,5 +44,8 @@ public class SimpleSceneManager {
 	public Iterator<Entity> getActiveIterator() {
 		return active.iterator();
 	}
+	public Camera getCamera() {
+		return camera;
+	}
 	
 }

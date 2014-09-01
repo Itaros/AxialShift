@@ -8,9 +8,9 @@ import ru.axialshift.utils.Conversions;
 
 public class Entity extends TransformationProvider {
 
-	private Vector3f coords=new Vector3f(0F,0F,0F);
-	private Quaternion rotation=new Quaternion();
-	private Vector3f scale=new Vector3f(1F,1F,1F);
+	protected Vector3f coords=new Vector3f(0F,0F,0F);
+	protected Quaternion rotation=new Quaternion();
+	protected Vector3f scale=new Vector3f(1F,1F,1F);
 	
 	public void setCoords(Vector3f n){
 		coords = n;

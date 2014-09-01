@@ -1,5 +1,7 @@
 package ru.axialshift.demo;
 
+import org.lwjgl.opengl.Display;
+
 import ru.axialshift.context.DebugToolsContext;
 import ru.axialshift.context.PrimitivesContext;
 import ru.axialshift.display.BaseDisplay;
@@ -7,6 +9,7 @@ import ru.axialshift.programs.ClearScreenPass;
 import ru.axialshift.programs.IRenderProgram;
 import ru.axialshift.programs.SceneRenderingPass;
 import ru.axialshift.programs.SetProgramPass;
+import ru.axialshift.scene.Camera;
 import ru.axialshift.scene.SimpleGraphicalEntity;
 import ru.axialshift.scene.SimpleSceneManager;
 import ru.axialshift.utils.Console;
@@ -31,6 +34,9 @@ public class DemoDisplay extends BaseDisplay {
 		debugTools.setBindingContractToAll(contract);
 		//Presets
 		uvsetScene.addToActive(quadObject);
+		Camera cam = new Camera();
+		cam.setupPerspectiveProjection(800F/600F, 60F, 0.1F, 100F);
+		uvsetScene.setCamera(cam);
 		//Context
 		this.manager.enqueueContext(primitives);
 		this.manager.enqueueContext(debugTools);
