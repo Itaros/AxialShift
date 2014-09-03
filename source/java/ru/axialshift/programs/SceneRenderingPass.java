@@ -22,27 +22,15 @@ public class SceneRenderingPass extends BasePass {
 		this.manager=manager;
 	}
 	
-	private float deb=0f;
-	
 	@Override
 	public void execute(RenderingManager renderingManager) {
 		
 		Camera cam = manager.getCamera();
-		Vector3f posdeb2 = cam.getCoords();
-		//posdeb2.y+=0.01F;
-		cam.setCoords(posdeb2);
 		
 		Iterator<Entity> i = manager.getActiveIterator();
 		while(i.hasNext()){
 			Entity e = i.next();
 			render(renderingManager,e,cam);
-			Quaternion q = e.getRotation();
-			Vector3f posdeb = e.getCoords();
-			QuaternionHelper.rotate(q, deb, 0.5F ,0 );
-			deb+=0.05F;
-			posdeb.z-=0.01F;
-			e.setCoords(posdeb);
-			e.setRotation(q);
 		}
 	}
 

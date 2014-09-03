@@ -12,9 +12,10 @@ public class Entity extends TransformationProvider {
 	protected Quaternion rotation=new Quaternion();
 	protected Vector3f scale=new Vector3f(1F,1F,1F);
 	
-	public void setCoords(Vector3f n){
+	public Entity setCoords(Vector3f n){
 		coords = n;
 		markDirty();
+		return this;
 	}
 	public Vector3f getCoords(){
 		return coords;

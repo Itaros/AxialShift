@@ -1,6 +1,7 @@
 package ru.axialshift.demo;
 
 import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector3f;
 
 import ru.axialshift.context.DebugToolsContext;
 import ru.axialshift.context.PrimitivesContext;
@@ -25,7 +26,7 @@ public class DemoDisplay extends BaseDisplay {
 	String[] defaultBindingDefs = {"0->in_Position","1->in_uvs"};
 	BindingContract contract = new BindingContract(defaultBindingDefs);
 	
-	SimpleGraphicalEntity quadObject = new SimpleGraphicalEntity(primitives.getQuad());
+	SimpleGraphicalEntity quadObject = (SimpleGraphicalEntity) new SimpleGraphicalEntity(primitives.getQuad()).setCoords(new Vector3f(0F,0F,-1F));
 	
 	@Override
 	protected void start() {
