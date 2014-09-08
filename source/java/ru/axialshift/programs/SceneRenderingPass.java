@@ -2,6 +2,7 @@ package ru.axialshift.programs;
 
 import java.util.Iterator;
 
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.util.vector.Quaternion;
 import org.lwjgl.util.vector.Vector3f;
@@ -26,6 +27,9 @@ public class SceneRenderingPass extends BasePass {
 	public void execute(RenderingManager renderingManager) {
 		
 		Camera cam = manager.getCamera();
+		
+		GL11.glDepthRange(cam.getNear(), cam.getFar());
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		
 		Iterator<Entity> i = manager.getActiveIterator();
 		while(i.hasNext()){

@@ -10,9 +10,22 @@ public class Camera extends Entity {
 	
 	//private Matrix4f PV = new Matrix4f();
 	
+	private float near,far;
+	
+	public float getNear() {
+		return near;
+	}
+
+	public float getFar() {
+		return far;
+	}
+
 	public Camera setupPerspectiveProjection(float aspectRatio, float fieldOfView, float nearPlane, float farPlane){
 		projection = new Matrix4f();
 		 
+		this.near=nearPlane;
+		this.far=farPlane;
+		
 		float y_scale = (float) (1D/Math.tan((Math.PI/180D)*(fieldOfView / 2f)));
 		float x_scale = y_scale / aspectRatio;
 		float frustum_length = farPlane - nearPlane;
