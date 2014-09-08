@@ -15,6 +15,8 @@
  */
 package ru.axialshift.resources;
 
+import org.lwjgl.util.vector.Vector3f;
+
 public class MeshData {
 
 	protected MeshData(){
@@ -46,8 +48,47 @@ public class MeshData {
 		tangents = new float[vertices.length];
 		bitangents = new float[vertices.length];
 		//TODO: calc stuff like normals, tangents and bitangents
+		prepNormals();
+		
 		isReady=true;
 		return this;
+	}
+	
+	private void prepNormals(){
+		//Normal calc is performed per triangle
+		for(int i = 0; i < indices.length ; i +=3){
+			int i1=indices[i];
+			int i2=indices[i+1];
+			int i3=indices[i+2];
+			
+			Vector3f c1 = new Vector3f(vertices[(3*i1)+0],vertices[(3*i1)+1],vertices[(3*i1)+2]);
+			Vector3f c2 = new Vector3f(vertices[(3*i2)+0],vertices[(3*i2)+1],vertices[(3*i2)+2]);
+			Vector3f c3 = new Vector3f(vertices[(3*i3)+0],vertices[(3*i3)+1],vertices[(3*i3)+2]);
+			
+			Vector3f S = new Vector3f();
+			Vector3f T = new Vector3f();
+			S=Vector3f.sub(c2, c1, S);
+			T=Vector3f.sub(c3, c1, T);
+			
+			Vector3f N = new Vector3f(
+					(S.y*T.z)-(S.z*T.y),
+					(S.z*T.x)-(S.x*T.z),
+					(S.x*T.y)-(S.y*T.x)
+					);
+			
+			normals[(3*i1)+0]=N.x;
+			normals[(3*i1)+1]=N.y;	
+			normals[(3*i1)+2]=N.z;	
+			
+			normals[(3*i2)+0]=N.x;
+			normals[(3*i2)+1]=N.y;
+			normals[(3*i2)+2]=N.z;	
+			
+			normals[(3*i3)+0]=N.x;
+			normals[(3*i3)+1]=N.y;	
+			normals[(3*i3)+2]=N.z;	
+		}
+		
 	}
 	
 	public float[] getVertices(){
