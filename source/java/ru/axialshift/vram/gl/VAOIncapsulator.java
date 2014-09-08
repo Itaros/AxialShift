@@ -68,20 +68,22 @@ public class VAOIncapsulator extends VRAMObject implements IRequiresBindingContr
 	 * It binds VAO, sets pointers, binds indices VBO and draws it. Then it unbinds it.
 	 */
 	public void drawDirectly() {
-		GL30.glBindVertexArray(glpointer);
-		
-		if(contract!=null){
-			contract.enableVBOAttribArrays();
+		if(this.IsAvailable()){
+			GL30.glBindVertexArray(glpointer);
+			
+			if(contract!=null){
+				contract.enableVBOAttribArrays();
+			}
+			//GL20.glEnableVertexAttribArray(0);
+			//GL20.glEnableVertexAttribArray(1);
+			//GL20.glEnableVertexAttribArray(2);
+			//GL20.glEnableVertexAttribArray(3);
+			//GL20.glEnableVertexAttribArray(4);
+			
+			indicesVBO.draw();
+			
+			GL30.glBindVertexArray(0);
 		}
-		//GL20.glEnableVertexAttribArray(0);
-		//GL20.glEnableVertexAttribArray(1);
-		//GL20.glEnableVertexAttribArray(2);
-		//GL20.glEnableVertexAttribArray(3);
-		//GL20.glEnableVertexAttribArray(4);
-		
-		indicesVBO.draw();
-		
-		GL30.glBindVertexArray(0);
 	}
 
 	
