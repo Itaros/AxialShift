@@ -23,10 +23,10 @@ public class DemoDisplay extends BaseDisplay {
 	PrimitivesContext primitives = new PrimitivesContext();
 	DebugToolsContext debugTools = new DebugToolsContext();
 	
-	String[] defaultBindingDefs = {"0->in_Position","1->in_uvs"};
+	String[] defaultBindingDefs = {"0->in_Position","1->in_uvs","2->in_normals"};
 	BindingContract contract = new BindingContract(defaultBindingDefs);
 	
-	SimpleGraphicalEntity quadObject = (SimpleGraphicalEntity) new SimpleGraphicalEntity(primitives.getQuad()).setCoords(new Vector3f(0F,0F,-1F));
+	SimpleGraphicalEntity quadObject = (SimpleGraphicalEntity) new SimpleGraphicalEntity(primitives.getSphere()).setCoords(new Vector3f(0F,0F,-5F));
 	
 	@Override
 	protected void start() {
@@ -44,8 +44,9 @@ public class DemoDisplay extends BaseDisplay {
 		
 		IRenderProgram[] renderQueue = new IRenderProgram[]
 				{
+					new ApplyRotationPass(quadObject,.01F,0F,0F),
 					new ClearScreenPass(),
-					new SetProgramPass(debugTools.getUVsProgram()),
+					new SetProgramPass(debugTools.getNormalsProgram()),
 					new SceneRenderingPass(uvsetScene)
 				};
 		

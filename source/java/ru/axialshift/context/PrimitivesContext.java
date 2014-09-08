@@ -15,6 +15,7 @@
  */
 package ru.axialshift.context;
 
+import ru.axialshift.resources.OBJMesh;
 import ru.axialshift.resources.QuadMesh;
 import ru.axialshift.vram.BindingContract;
 import ru.axialshift.vram.VRAMObject;
@@ -23,7 +24,7 @@ import ru.axialshift.vram.gl.VAOIncapsulator;
 public class PrimitivesContext extends Context {
 
 	private VAOIncapsulator quad = new VAOIncapsulator(new QuadMesh());
-	
+	private VAOIncapsulator sphere = new VAOIncapsulator(new OBJMesh("bin/meshes/sphere.obj"));
 	
 	public PrimitivesContext() {
 		super();
@@ -32,12 +33,14 @@ public class PrimitivesContext extends Context {
 	}
 
 	private VRAMObject[] defineStaticData() {
-		return new VRAMObject[]{quad};
+		return new VRAMObject[]{quad,sphere};
 	}
 
-	
 	public VAOIncapsulator getQuad(){
 		return quad;
+	}	
+	public VAOIncapsulator getSphere(){
+		return sphere;
 	}
 
 	
